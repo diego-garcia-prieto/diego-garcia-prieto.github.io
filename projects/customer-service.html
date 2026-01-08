@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Service Analytics Dashboard - Diego Garcia</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Voltar ao Portfólio
+        </a>
+    </div>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <h1>Customer Service Analytics Dashboard</h1>
+            <p class="project-subtitle">Análise Executiva de Performance de Atendimento ao Cliente</p>
+            <div class="project-meta">
+                <span class="meta-item"><i class="fas fa-calendar"></i> 2025</span>
+                <span class="meta-item"><i class="fas fa-building"></i> IBM Brasil - Naturgy</span>
+                <span class="meta-item"><i class="fas fa-chart-line"></i> Power BI</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Image -->
+    <section class="project-image-section">
+        <div class="container">
+            <div class="project-image-large">
+                <img src="../images/da-dashboard.png" alt="Dashboard de Atendimento ao Cliente">
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-details">
+        <div class="container">
+            <div class="details-grid">
+                
+                <!-- Overview -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-info-circle"></i> Visão Geral</h2>
+                    <p>
+                        Dashboard executivo desenvolvido para análise de performance de atendimento ao cliente em três organizações 
+                        (Empresas A, B e C), processando <strong>16.487 solicitações</strong> com foco em identificar gargalos operacionais 
+                        e oportunidades de melhoria.
+                    </p>
+                    <p>
+                        O projeto integra dados de múltiplos canais de atendimento (Teleatendimento e Call Center), permitindo 
+                        análise temporal, comparação entre organizações e monitoramento de KPIs críticos.
+                    </p>
+                </div>
+
+                <!-- Challenge -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Desafio</h2>
+                    <ul class="challenge-list">
+                        <li>Dispersão de informações em múltiplos sistemas sem consolidação centralizada</li>
+                        <li>Ausência de visibilidade executiva sobre performance de atendimento</li>
+                        <li>Dificuldade em identificar padrões sazonais e tendências</li>
+                        <li>Necessidade de comparar performance entre diferentes organizações e canais</li>
+                        <li>Falta de métricas claras para tomada de decisão estratégica</li>
+                    </ul>
+                </div>
+
+                <!-- Solution -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-lightbulb"></i> Solução</h2>
+                    <p>
+                        Desenvolvimento de dashboard interativo no Power BI com arquitetura de dados otimizada:
+                    </p>
+                    <ul class="solution-list">
+                        <li><strong>ETL e Modelagem:</strong> Consolidação de bases de dados com relacionamentos star schema</li>
+                        <li><strong>Medidas DAX Avançadas:</strong> Cálculos de tempo médio de resolução, taxa de resolução e variações MoM</li>
+                        <li><strong>Visualizações Executivas:</strong> KPIs destacados, donut chart temporal e breakdown por canal</li>
+                        <li><strong>Análise Comparativa:</strong> Painel de solicitações por organização com drill-through capabilities</li>
+                        <li><strong>Sazonalidade:</strong> Gráfico de rosca com 12 meses revelando padrões temporais</li>
+                    </ul>
+                </div>
+
+                <!-- Key Results -->
+                <div class="detail-block highlight-block">
+                    <h2><i class="fas fa-trophy"></i> Resultados-Chave</h2>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-number">97,99%</div>
+                            <div class="result-label">Taxa de Resolução de Solicitações</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">2,9h</div>
+                            <div class="result-label">Tempo Médio de Resolução</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">76,1%</div>
+                            <div class="result-label">Via Teleatendimento</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">16.487</div>
+                            <div class="result-label">Solicitações Analisadas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Details -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-cogs"></i> Detalhes Técnicos</h2>
+                    <div class="tech-details">
+                        <div class="tech-section">
+                            <h3>Tecnologias Utilizadas</h3>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Power BI Desktop</span>
+                                <span class="tech-tag">DAX</span>
+                                <span class="tech-tag">Power Query (M)</span>
+                                <span class="tech-tag">Excel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-section">
+                            <h3>Medidas DAX Principais</h3>
+                            <ul>
+                                <li><code>Total_Solicitacoes = COUNTROWS(Base)</code></li>
+                                <li><code>Taxa_Resolucao = DIVIDE([Solicitacoes_Fechadas], [Total_Solicitacoes])</code></li>
+                                <li><code>Tempo_Medio_Resolucao = AVERAGE([Horas_Resolucao])</code></li>
+                                <li><code>Variacao_MoM = ([Total_Mes_Atual] - [Total_Mes_Anterior]) / [Total_Mes_Anterior]</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="tech-section">
+                            <h3>Arquitetura de Dados</h3>
+                            <ul>
+                                <li><strong>Tabela Fato:</strong> Base (21 colunas, ~16k linhas)</li>
+                                <li><strong>Dimensões:</strong> Calendario, Cliente</li>
+                                <li><strong>Relacionamentos:</strong> One-to-Many via chaves primárias</li>
+                                <li><strong>Granularidade:</strong> Nível de atendimento individual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Impact -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-chart-line"></i> Impacto no Negócio</h2>
+                    <ul class="impact-list">
+                        <li>
+                            <strong>Visibilidade Executiva:</strong> Gestores agora têm acesso instantâneo a KPIs críticos 
+                            sem necessidade de relatórios manuais
+                        </li>
+                        <li>
+                            <strong>Identificação de Gargalos:</strong> Análise por canal revelou oportunidades de redistribuição 
+                            de carga entre Teleatendimento (76,1%) e Call Center (69,7%)
+                        </li>
+                        <li>
+                            <strong>Planejamento Sazonal:</strong> Padrões temporais identificados permitem alocação proativa 
+                            de recursos em meses de pico
+                        </li>
+                        <li>
+                            <strong>Benchmarking:</strong> Comparação entre organizações A, B e C facilita identificação de 
+                            best practices e áreas de melhoria
+                        </li>
+                        <li>
+                            <strong>Redução de Tempo:</strong> Geração de relatórios mensais reduzida de 4 horas para 
+                            refresh automático de 5 minutos
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Lessons Learned -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-graduation-cap"></i> Aprendizados</h2>
+                    <ul class="lessons-list">
+                        <li>
+                            <strong>Importância da Modelagem:</strong> Investir tempo em star schema otimizado reduz drasticamente 
+                            o tempo de refresh e melhora performance de consultas DAX
+                        </li>
+                        <li>
+                            <strong>KPIs Visuais:</strong> Números grandes e contrastantes (preto/amarelo/laranja/azul) facilitam 
+                            leitura executiva rápida
+                        </li>
+                        <li>
+                            <strong>Granularidade Adequada:</strong> Balancear entre detalhamento (drill-through) e simplicidade 
+                            visual na camada de apresentação
+                        </li>
+                        <li>
+                            <strong>Validação com Stakeholders:</strong> Iterações rápidas com usuários finais garantiram que 
+                            métricas refletiam necessidades reais do negócio
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Diego da Silva Garcia Prieto. Todos os direitos reservados.</p>
+            <a href="../index.html" class="footer-link">← Voltar ao Portfólio</a>
+        </div>
+    </footer>
+
+</body>
+</html>
