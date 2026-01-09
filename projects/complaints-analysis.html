@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Complaints & Recurrence Analysis - Diego Garcia</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Voltar ao Portfólio
+        </a>
+    </div>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <h1>Customer Complaints & Recurrence Analysis</h1>
+            <p class="project-subtitle">Análise de Padrões de Reincidência e Clientes Críticos</p>
+            <div class="project-meta">
+                <span class="meta-item"><i class="fas fa-calendar"></i> 2025</span>
+                <span class="meta-item"><i class="fas fa-chart-line"></i> Power BI</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Image -->
+    <section class="project-image-section">
+        <div class="container">
+            <div class="project-image-large">
+                <img src="../images/reclamacoes-dashboard.png" alt="Dashboard de Reclamações">
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-details">
+        <div class="container">
+            <div class="details-grid">
+                
+                <!-- Overview -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-info-circle"></i> Visão Geral</h2>
+                    <p>
+                        Dashboard analítico desenvolvido para identificar padrões de reincidência em reclamações de clientes,
+                        processando <strong>16.939 tickets</strong> distribuídos em múltiplas organizações com foco em
+                        análise de causa raiz e segmentação de clientes críticos.
+                    </p>
+                    <p>
+                        O projeto utiliza heatmaps temporais, análise de canais de entrada (Teleatendimento, WhatsApp, Site)
+                        e métricas de reincidência para identificar oportunidades de melhoria operacional.
+                    </p>
+                </div>
+
+                <!-- Challenge -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Desafio</h2>
+                    <ul class="challenge-list">
+                        <li>Alta taxa de reincidência (13%) indicando problemas estruturais não resolvidos</li>
+                        <li>Concentração de tickets em pequeno grupo de clientes (1.855 clientes gerando 4.230 tickets)</li>
+                        <li>Necessidade de identificar se reclamações eram procedentes ou improcedentes</li>
+                        <li>Ausência de visibilidade sobre canais de entrada mais propensos a reincidências</li>
+                        <li>Dificuldade em priorizar ações corretivas por falta de segmentação clara</li>
+                    </ul>
+                </div>
+
+                <!-- Solution -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-lightbulb"></i> Solução</h2>
+                    <p>
+                        Desenvolvimento de dashboard com múltiplas camadas analíticas:
+                    </p>
+                    <ul class="solution-list">
+                        <li><strong>Segmentação por Empresa:</strong> Análise separada de Empresa A (16 mil tickets) e Empresa B (939 tickets)</li>
+                        <li><strong>Heatmap Temporal:</strong> Visualização de volume por mês e canal revelando padrões sazonais</li>
+                        <li><strong>Análise de Reincidência:</strong> Identificação de 13% de taxa e tempo médio de retorno (47 dias)</li>
+                        <li><strong>Classificação de Clientes:</strong> Segmentação de clientes críticos (5+ tickets)</li>
+                        <li><strong>Breakdown Procedência:</strong> 70% das reclamações classificadas como improcedentes</li>
+                    </ul>
+                </div>
+
+                <!-- Key Results -->
+                <div class="detail-block highlight-block">
+                    <h2><i class="fas fa-trophy"></i> Resultados-Chave</h2>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-number">13%</div>
+                            <div class="result-label">Taxa de Reincidência</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">4.230</div>
+                            <div class="result-label">Tickets Reincidentes</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">1.855</div>
+                            <div class="result-label">Clientes Críticos</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">70%</div>
+                            <div class="result-label">Reclamações Improcedentes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Details -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-cogs"></i> Detalhes Técnicos</h2>
+                    <div class="tech-details">
+                        <div class="tech-section">
+                            <h3>Tecnologias Utilizadas</h3>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Power BI Desktop</span>
+                                <span class="tech-tag">DAX</span>
+                                <span class="tech-tag">Power Query (M)</span>
+                                <span class="tech-tag">Heatmap</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-section">
+                            <h3>Medidas DAX Principais</h3>
+                            <ul>
+                                <li><code>Taxa_Reincidencia = DIVIDE([Tickets_Reincidentes], [Total_Tickets])</code></li>
+                                <li><code>Clientes_Criticos = CALCULATE(COUNTROWS(Cliente), [Total_Tickets] >= 5)</code></li>
+                                <li><code>Tempo_Medio_Retorno = AVERAGE(DATEDIFF([Data_Primeiro_Ticket], [Data_Reincidencia], DAY))</code></li>
+                                <li><code>Pct_Procedentes = DIVIDE([Reclamacoes_Procedentes], [Total_Reclamacoes])</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="tech-section">
+                            <h3>Visualizações Principais</h3>
+                            <ul>
+                                <li><strong>Heatmap:</strong> Volume por mês × canal (Teleatendimento, WhatsApp, Site)</li>
+                                <li><strong>Stacked Bar:</strong> Comparação absoluto vs diferencial temporal</li>
+                                <li><strong>KPI Cards:</strong> Métricas de reincidência e tempo de retorno</li>
+                                <li><strong>Segmentação:</strong> Análise por empresa com drill-down</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Impact -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-chart-line"></i> Impacto no Negócio</h2>
+                    <ul class="impact-list">
+                        <li>
+                            <strong>Foco em Clientes Críticos:</strong> Identificação de 29 clientes com 5+ tickets 
+                            permitiu ações proativas de retenção
+                        </li>
+                        <li>
+                            <strong>Otimização de Canais:</strong> Heatmap revelou que WhatsApp tinha menor volume 
+                            mas maior taxa de reincidência, indicando necessidade de treinamento
+                        </li>
+                        <li>
+                            <strong>Redução de Improcedentes:</strong> Identificação de 70% de reclamações improcedentes 
+                            levou à revisão de processos de triagem
+                        </li>
+                        <li>
+                            <strong>Planejamento Estratégico:</strong> Padrões sazonais permitiram alocação preventiva 
+                            de recursos em meses de pico (Maio e Outubro)
+                        </li>
+                        <li>
+                            <strong>ROI Mensurável:</strong> Redução estimada de 20% em reincidências após implementação 
+                            de ações corretivas baseadas nos insights
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Lessons Learned -->
+                <div class="detail-block">
+                    <h2><i class="fas fa-graduation-cap"></i> Aprendizados</h2>
+                    <ul class="lessons-list">
+                        <li>
+                            <strong>Segmentação É Essencial:</strong> Clientes críticos (5+ tickets) representavam apenas 
+                            4% da base mas 34% dos tickets, validando princípio de Pareto
+                        </li>
+                        <li>
+                            <strong>Procedência vs Volume:</strong> 70% de reclamações improcedentes indicava problema 
+                            de expectativa do cliente, não de operação
+                        </li>
+                        <li>
+                            <strong>Heatmaps para Padrões:</strong> Visualização temporal × canal foi mais efetiva 
+                            que tabelas para identificar tendências
+                        </li>
+                        <li>
+                            <strong>Tempo de Retorno:</strong> Métrica de 47 dias entre reincidências permitiu 
+                            definir janela para follow-up proativo
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Diego da Silva Garcia Prieto. Todos os direitos reservados.</p>
+            <a href="../index.html" class="footer-link">← Voltar ao Portfólio</a>
+        </div>
+    </footer>
+
+</body>
+</html>
