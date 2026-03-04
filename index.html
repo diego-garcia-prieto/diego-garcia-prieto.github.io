@@ -1,244 +1,823 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Diego Garcia Prieto | Data Analytics Portfolio</title>
-
 <meta name="description" content="Portfólio de Data Analytics de Diego Garcia Prieto. Projetos de Business Intelligence, automação e análise de dados com Power BI e Python.">
-
-<link rel="stylesheet" href="css/style.css">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
+<style>
+/* ===== RESET & ROOT ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #0d0f14;
+  --ink-soft: #3a3d4a;
+  --mist: #8b8fa8;
+  --paper: #f5f4f0;
+  --white: #ffffff;
+  --blue: #1c4ed8;
+  --blue-bright: #3b82f6;
+  --blue-pale: #dbeafe;
+  --accent: #f59e0b;
+  --border: rgba(0,0,0,0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.06);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== NOISE TEXTURE OVERLAY ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  background: rgba(245, 244, 240, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+
+nav.scrolled { box-shadow: var(--shadow-sm); }
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--blue); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover { color: var(--blue); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background geometry */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue-pale);
+  color: var(--blue);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s ease forwards;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--blue-bright);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s ease forwards;
+}
+
+.hero-name .accent { color: var(--blue); }
+
+.hero-role {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--mist);
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.3s ease forwards;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 480px;
+  margin-bottom: 40px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.4s ease forwards;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.5s ease forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: white;
+  box-shadow: 0 4px 14px rgba(13,15,20,0.2);
+}
+
+.btn-primary:hover {
+  background: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(28,78,216,0.3);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  border-color: var(--blue-bright);
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Hero right: stat cards */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeIn 0.8s 0.6s ease forwards;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card:hover::before { opacity: 1; }
+
+.stat-card:nth-child(2) { margin-top: 24px; }
+.stat-card:nth-child(4) { margin-top: -24px; }
+
+.stat-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-number .unit {
+  font-size: 1.4rem;
+  color: var(--blue);
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--mist);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* ===== SECTION SHARED ===== */
+section { padding: 100px 0; }
+
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--mist);
+  font-weight: 300;
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+.section-header {
+  margin-bottom: 60px;
+}
+
+/* ===== PROJECTS ===== */
+#projects { background: white; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--paper);
+  border-radius: 16px;
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::after {
+  content: '→';
+  position: absolute;
+  bottom: 28px; right: 28px;
+  font-size: 1.2rem;
+  color: var(--mist);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.project-card:hover {
+  background: white;
+  border-color: var(--blue-bright);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+
+.project-card:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--blue);
+}
+
+.project-icon {
+  width: 44px; height: 44px;
+  background: var(--blue-pale);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--mist);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: white;
+  color: var(--ink-soft);
+  border: 1px solid var(--border);
+  letter-spacing: 0.01em;
+}
+
+/* Featured project — spans 2 cols */
+.project-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--ink) 0%, #1a2035 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.project-card.featured .project-title,
+.project-card.featured .project-desc { color: rgba(255,255,255,0.85); }
+
+.project-card.featured .project-title { color: white; }
+
+.project-card.featured .project-icon {
+  background: rgba(255,255,255,0.1);
+  color: var(--blue-bright);
+}
+
+.project-card.featured .tag {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.project-card.featured:hover {
+  background: linear-gradient(135deg, #1a2035 0%, #1c4ed8 100%);
+  border-color: transparent;
+  transform: translateY(-6px);
+}
+
+.project-card.featured::after { color: rgba(255,255,255,0.5); }
+.project-card.featured:hover::after { color: white; }
+
+/* ===== OUTROS PROJETOS ===== */
+#outros { background: var(--paper); }
+
+.outros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.outro-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.outro-card:hover {
+  border-color: var(--blue-bright);
+  box-shadow: var(--shadow-md);
+  transform: translateX(6px);
+}
+
+.outro-icon {
+  width: 40px; height: 40px;
+  background: var(--blue-pale);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.outro-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.outro-desc {
+  font-size: 0.82rem;
+  color: var(--mist);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--ink);
+  color: white;
+  padding: 48px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  opacity: 0.4;
+  margin-top: 4px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.25s;
+}
+
+.footer-link:hover {
+  background: var(--blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ===== DIVIDER LINE ===== */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-stats { max-width: 500px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: span 1; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .stat-card:nth-child(2), .stat-card:nth-child(4) { margin-top: 0; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
 </head>
-
-
 <body>
 
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">DGP<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projetos</a></li>
+      <li><a href="#outros">Outros</a></li>
+      <li><a href="https://linkedin.com/in/diegodgprieto" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</nav>
 
+<!-- HERO -->
 <section class="hero">
+  <div class="container">
+    <div class="hero-inner">
 
-<div class="container">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <i class="fa-solid fa-circle-dot" style="font-size:0.6rem"></i>
+          Disponível para novas oportunidades
+        </div>
+        <h1 class="hero-name">Diego<br>Garcia<br><span class="accent">Prieto</span></h1>
+        <p class="hero-role">Data Analyst · Business Intelligence · Automation</p>
+        <p class="hero-desc">
+          Transformo dados complexos em decisões claras. Especializado em Power BI, Python e modelagem analítica para operações de larga escala.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fa-solid fa-folder-open"></i> Ver Projetos
+          </a>
+          <a href="https://linkedin.com/in/diegodgprieto" target="_blank" class="btn btn-secondary">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
 
-<h1>Diego Garcia Prieto</h1>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">220<span class="unit">h</span></div>
+          <div class="stat-label">Economia operacional mensal identificada</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">61<span class="unit">%</span></div>
+          <div class="stat-label">Potencial de automação em atendimento</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">16<span class="unit">k+</span></div>
+          <div class="stat-label">Registros analisados em produção</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">97<span class="unit">.9%</span></div>
+          <div class="stat-label">Taxa de resolução identificada</div>
+        </div>
+      </div>
 
-<p class="hero-subtitle">
-Data Analyst | Business Intelligence | Automation
-</p>
-
-<p class="hero-description">
-Analista de dados especializado em Business Intelligence, automação de processos
-e análise operacional. Experiência em transformar grandes volumes de dados em
-insights estratégicos utilizando Power BI, Python e modelagem analítica.
-</p>
-
-</div>
-
+    </div>
+  </div>
 </section>
 
+<div class="divider"></div>
 
+<!-- PROJETOS EM DESTAQUE -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Portfólio</div>
+      <h2 class="section-title">Projetos em Destaque</h2>
+      <p class="section-subtitle">Análises e dashboards desenvolvidos para operações reais, com foco em impacto mensurável.</p>
+    </div>
 
-<section class="projects">
+    <div class="projects-grid">
 
-<div class="container">
+      <a href="projects/zendesk-automation.html" class="project-card featured reveal">
+        <div class="project-icon">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <div class="project-title">Ticket Automation Analysis</div>
+        <div class="project-desc">
+          Análise de 16k+ tickets de atendimento para identificação de oportunidades de automação. Resultou em estimativa de 220h de economia operacional mensal e mapeamento de 61% dos processos automatizáveis.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Python</span>
+          <span class="tag">Zendesk</span>
+          <span class="tag">NLP</span>
+        </div>
+      </a>
 
-<h2 class="section-title">Projetos em Destaque</h2>
+      <a href="projects/complaints-analysis.html" class="project-card reveal" style="transition-delay: 0.1s">
+        <div class="project-icon">
+          <i class="fa-solid fa-chart-bar"></i>
+        </div>
+        <div class="project-title">Customer Complaints Analysis</div>
+        <div class="project-desc">
+          Análise de reincidência de reclamações e identificação de clientes críticos para priorização operacional.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+        </div>
+      </a>
 
-<div class="projects-grid">
+      <a href="projects/customer-service.html" class="project-card reveal" style="transition-delay: 0.2s">
+        <div class="project-icon">
+          <i class="fa-solid fa-gauge-high"></i>
+        </div>
+        <div class="project-title">Customer Service Dashboard</div>
+        <div class="project-desc">
+          Dashboard executivo para análise de performance operacional de atendimento em tempo real.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Executive</span>
+        </div>
+      </a>
 
-
-<a href="projects/zendesk-automation.html" class="project-card">
-
-<div class="project-content">
-
-<h3>Ticket Automation Analysis</h3>
-
-<p class="project-description">
-Análise de tickets de atendimento para identificação de oportunidades de automação
-e estimativa de impacto operacional.
-</p>
-
-</div>
-
-</a>
-
-
-
-<a href="projects/complaints-analysis.html" class="project-card">
-
-<div class="project-content">
-
-<h3>Customer Complaints Analysis</h3>
-
-<p class="project-description">
-Análise de reincidência de reclamações e identificação de clientes críticos.
-</p>
-
-</div>
-
-</a>
-
-
-
-<a href="projects/customer-service.html" class="project-card">
-
-<div class="project-content">
-
-<h3>Customer Service Dashboard</h3>
-
-<p class="project-description">
-Dashboard executivo para análise de performance operacional de atendimento.
-</p>
-
-</div>
-
-</a>
-
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </section>
 
+<div class="divider"></div>
 
+<!-- OUTROS PROJETOS -->
+<section id="outros">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Mais trabalhos</div>
+      <h2 class="section-title">Outros Projetos</h2>
+    </div>
 
-<section class="projects">
-
-<div class="container">
-
-<h2 class="section-title">Impacto de Negócio</h2>
-
-<div class="projects-grid">
-
-
-<div class="project-card">
-
-<div class="project-content">
-
-<h3>220h</h3>
-
-<p class="project-description">
-Economia operacional mensal identificada em análise de automação de tickets.
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="project-card">
-
-<div class="project-content">
-
-<h3>61%</h3>
-
-<p class="project-description">
-Potencial de automação identificado em processos de atendimento.
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="project-card">
-
-<div class="project-content">
-
-<h3>16k+</h3>
-
-<p class="project-description">
-Registros analisados em projetos de análise de atendimento ao cliente.
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="project-card">
-
-<div class="project-content">
-
-<h3>97.9%</h3>
-
-<p class="project-description">
-Taxa de resolução identificada em análise de performance de atendimento.
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
+    <div class="outros-grid">
+      <a href="projects/debito-automatico.html" class="outro-card reveal">
+        <div class="outro-icon">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+        <div>
+          <div class="outro-title">Análise de Débito Automático</div>
+          <div class="outro-desc">Monitoramento e análise estratégica de solicitações de adesão ao débito automático.</div>
+        </div>
+      </a>
+    </div>
+  </div>
 </section>
 
-
-
-<section class="projects">
-
-<div class="container">
-
-<h2 class="section-title">Outros Projetos</h2>
-
-<div class="projects-grid">
-
-
-<a href="projects/debito-automatico.html" class="project-card">
-
-<div class="project-content">
-
-<h3>Análise de Débito Automático</h3>
-
-<p class="project-description">
-Monitoramento e análise estratégica de solicitações de adesão ao débito automático.
-</p>
-
-</div>
-
-</a>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<footer class="footer">
-
-<div class="container">
-
-<p>
-© 2025 Diego da Silva Garcia Prieto
-</p>
-
-<p>
-LinkedIn:
-<a href="https://linkedin.com/in/diegodgprieto" target="_blank">
-linkedin.com/in/diegodgprieto
-</a>
-</p>
-
-</div>
-
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-name">Diego Garcia Prieto</div>
+        <div class="footer-copy">© 2025 · Data Analytics Portfolio</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/diegodgprieto" target="_blank" class="footer-link" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:contato@diegogprieto.com" class="footer-link" title="Email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 </footer>
 
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
 
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
-
 </html>
